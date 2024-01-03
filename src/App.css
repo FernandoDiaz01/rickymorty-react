@@ -1,0 +1,11 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.visor{
+  width: 50px;
+  height: 10px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
