@@ -36,9 +36,7 @@ useEffect(() => {
   return (
     <>
     <h1>Welcome to Ricky and Morty App</h1>
-      <MyRoutes/>
-      <CharacterList characters={characters}/>
-      <Detail characters={characters}/>
+      <MyRoutes characters={characters}/>
     
      <InView
         as="div"

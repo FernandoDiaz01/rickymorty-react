@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom"
 
 
 
-export const Detail = () => {
+export const Detail = ({gender, species, origin,location}) => {
 
-  const [characterDetail, setCharacterDetail] = useState([]);
+  const [characterDetail, setCharacterDetail] = useState({});
 
-  let id = useParams()
+  let {id} = useParams()
   console.log(id)
 
   
@@ -15,9 +15,9 @@ export const Detail = () => {
     const getCharactersDetail = async () => {
       try {
         const response = await fetch(
-          `https://rickandmortyapi.com/api/character?page=${id}`
+          `https://rickandmortyapi.com/api/character/${id}`
         );
-        console.log(response.url)
+        
         if (!response.ok) {
           throw new Error('Error al obtener los detalles del personaje');
         }
@@ -31,14 +31,21 @@ export const Detail = () => {
   
     getCharactersDetail();
     console.log(characterDetail);
-  }, []);
+  }, [id]);
   
 
   return (
     <div>
         <h1>
-            Fer detalle 
+          Detalles del Personaje
         </h1>
+        {characterDetail && (
+          <ul className="character_detail_info">
+            <li>Gender:{gender} </li> 
+
+          </ul>
+        )}
+       
        
     </div>
   )

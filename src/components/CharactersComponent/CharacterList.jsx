@@ -8,7 +8,7 @@ export const CharacterList = ({ characters }) => {
   return (
     <ul className='character-list'>
       {characters?.map((character) => (
-        <NavLink key={character.id} to={`/character/${character.id}`} target='_blank'>
+        <NavLink key={character.id} to={`/character/${character.id}`}>
           <Character {...character} />
         </NavLink>
       ))}
