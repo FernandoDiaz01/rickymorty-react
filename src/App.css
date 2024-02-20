@@ -2,7 +2,21 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Schwifty', sans-serif;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background-image: url('./images/rickymortylanding.png'); 
+  background-size: cover; 
+  background-position: center; 
+  background-color: rgba(255, 255, 255, 0.7); 
+  background-repeat: no-repeat; */
+  color: black; 
+}
+
+
 .visor{
   width: 50px;
   height: 10px;

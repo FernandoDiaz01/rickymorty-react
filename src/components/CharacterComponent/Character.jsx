@@ -6,13 +6,17 @@ export const Character = ({ image, name, id }) => {
     
     <>
     
-      <NavLink to={"/character/" + { id }}>
-        <li className="character">
-          <img src={image} alt={name} />
-          <div>
-            <h2>{name}</h2>
+      <NavLink  to={`/character/${id}`} style={{ textDecoration: 'none' }} >
+        <div className="character-container">
+          <div className="img-container">
+          <img className="img" src={image} alt={name} />
           </div>
-        </li>
+
+          <div className="name-container" >
+            <h2 className="name">{name}</h2>
+          </div>
+       
+        </div>
       </NavLink>
     </>
   );

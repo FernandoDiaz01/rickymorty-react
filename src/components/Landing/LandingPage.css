@@ -1,0 +1,70 @@
+
+.container-landing{
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+}
+
+.text-btn-container{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+z-index: 1;
+}
+
+.img-landing{
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+}
+
+.title-landing{
+  font-size: 4em;
+  color: #00ff00;
+  text-shadow: 3px 3px 0px #000;
+  text-align: center;
+
+}
+.btn{
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff0055;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s, transform 0.4s;
+    z-index: 1;
+    margin: 20px;
+}
+
+.btn::before{
+    content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffd700;
+  width: 300%;
+  height: 300%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -1;
+  transition: transform 0.4s;
+}
+.btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .btn:hover {
+    color: #ff0055;
+    transform: scale(1.1);
+  }

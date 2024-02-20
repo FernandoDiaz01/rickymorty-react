@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback  } from 'react';
 import { InView } from "react-intersection-observer";
 import './App.css'
-import getCharacters from './services/getCharacters.js'
+import  {getCharacters}  from './services/getCharacters.js'
 import { MyRoutes } from './routers/routes.jsx';
-import { CharacterList } from './components/CharactersComponent/CharacterList.jsx';
-import { Detail } from './components/CharacterDetail/Detail.jsx';
+
 
 function App() {
 const [characters, setCharacters] = useState([])
@@ -15,9 +14,15 @@ const [page, setPage] = useState(1)
 const gettingCharacters = useCallback(async (pageNum) => {
   try {
     const results = await getCharacters(pageNum);
-    setCharacters((prev) => [...prev, ...results]); 
+
+    // Verifica si results es un array antes de intentar iterar
+    if (Array.isArray(results)) {
+      setCharacters((prev) => [...prev, ...results]);
+    } else {
+      console.error('Error: results is not an array', results);
+    }
   } catch (error) {
-    console.error("Error fetching characters:", error);
+    console.error('Error fetching characters:', error);
   }
 }, []);
 
@@ -35,7 +40,7 @@ useEffect(() => {
 
   return (
     <>
-    <h1>Welcome to Ricky and Morty App</h1>
+    
       <MyRoutes characters={characters}/>
     
      <InView
@@ -43,8 +48,8 @@ useEffect(() => {
         onChange={loadMoreCharacters}
         rootMargin="0px 0px 100px 0px" 
       >
-        Cargando más personajes...
-      </InView>
+   
+      </InView> 
         </>
   )
 }
