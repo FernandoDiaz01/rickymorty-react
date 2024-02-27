@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./Character.css";
 
 export const Character = ({ image, name, id }) => {
+  
   return (
     
     <>
@@ -10,6 +11,7 @@ export const Character = ({ image, name, id }) => {
         <div className="character-container">
           <div className="img-container">
           <img className="img" src={image} alt={name} />
+       
           </div>
 
           <div className="name-container" >

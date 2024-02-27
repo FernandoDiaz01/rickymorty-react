@@ -2,12 +2,11 @@ const { DataTypes} = require('sequelize')
 const sequelize = require('../db/dbase.cjs')
 
 const Character = sequelize.define('Characters',{
-    /* id:{
-        type: sequelize.UUID,
-        defaultValue: sequelize.UUIDV4,
-        autoIncrement:true,
-        allowNull:true,
-    }, */
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     name: {
         type:DataTypes.STRING,
         allowNull: false,

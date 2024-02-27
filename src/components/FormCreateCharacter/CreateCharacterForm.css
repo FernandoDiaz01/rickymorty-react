@@ -1,10 +1,94 @@
-.container-all{
+
+.container-all {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    list-style: none;
-    background-image: linear-gradient(0deg, rgba(1, 15, 3, 0.94) 17%, rgba(64, 245, 10, 0.541) 92%, rgba(5, 10, 0, 0) 100%);
-    width: 100%;
+    flex-direction: column;
     height: 100vh;
+    background-color: #282c34; /* Fondo oscuro inspirado en Rick and Morty */
+  }
+  
+.container-title-character-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  color: black;
+ 
+  background-color: #282c34;
 }
+
+  .container-form {
+    background-color: #393939;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .text-label{
+    color: #fcfcfc;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    border-radius: 4px;
+    
+  }
+  .btn-form{
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff0055;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s, transform 0.4s;
+    z-index: 1;
+    margin: 20px;
+}
+
+.btn-form::before{
+    content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffd700;
+  width: 300%;
+  height: 300%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -1;
+  transition: transform 0.4s;
+}
+.btn-form:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .btn-form:hover {
+    color: #ff0055;
+    transform: scale(1.1);
+  }

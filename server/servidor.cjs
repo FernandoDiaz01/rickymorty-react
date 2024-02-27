@@ -27,6 +27,7 @@ sequelize
 app.get("/api/characters", async (req, res) => {
   try {
     console.log("Intentando obtener personajes desde la base de datos...");
+    
     const characters = await Character.findAll();
     if (characters.length === 0) {
       res
@@ -45,34 +46,30 @@ app.get("/api/characters", async (req, res) => {
 
 app.post("/api/characters", async (req, res) => {
 
-  const { name, gender, species, status, image } = req.body;
-
   
-
-
 
   try {
     
-    const existingCharacter = await Character.findOne({
-      where: { name: req.body.name }
-    });
-    
-    if (existingCharacter) {
-      console.error("El personaje ya existe");
-      return res.status(400).json({ error: "El personaje ya existe" });
-    }
-    const newCharacter = await Character.create({
-      name,
-      gender,
-      species,
-      status,
-      image
-    });
+    const ultimoID = await Character.max('id');
 
-    console.log("Character created", newCharacter);
-    res.json(newCharacter);
-  } catch (error) {
-    console.error("Error al crear el personaje", error);
-    res.status(500).json({ error: "Error interno del server" });
-  }
+    const nuevoID = ultimoID ? ultimoID + 1 : 1;
+
+    const nuevoPersonaje = {
+        id: nuevoID,
+        name: req.body.name,
+        gender: req.body.gender,
+        species: req.body.species,
+        status: req.body.status,
+        image: req.body.image
+    };
+
+   
+    const personajeCreado = await Character.create(nuevoPersonaje);
+
+    
+    res.status(201).json({ message: 'Personaje creado con ID exclusivo', personaje: personajeCreado });
+} catch (error) {
+    console.error('Error al crear el personaje:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+}
 });
