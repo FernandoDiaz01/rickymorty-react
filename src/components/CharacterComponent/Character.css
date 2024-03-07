@@ -24,14 +24,14 @@
     height: 2px;
     
 }
-.name{
+.name-character{
     color: white;
     font-size: 2rem;
     text-decoration: none;
     
     list-style: none;
 }
-.name:hover {
+.name-character:hover {
     color: rgb(81, 255, 0); /* Cambia el color al pasar el mouse */
     font-size: 1.9em; /* Ajusta el tamaño de la fuente al pasar el mouse */
 }

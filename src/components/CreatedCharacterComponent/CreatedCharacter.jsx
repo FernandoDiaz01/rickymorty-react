@@ -1,5 +1,5 @@
 import React from 'react'
-import homer from '../../images/homer.png'
+import homer from '../../imagesfront/homer.png'
 import { useNavigate } from 'react-router-dom'
 
 export const CreateCharacter = () => {

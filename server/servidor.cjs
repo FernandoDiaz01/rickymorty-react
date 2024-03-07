@@ -2,14 +2,21 @@ const express = require("express");
 const sequelize = require("../db/dbase.cjs");
 const Character = require("../models/CharacterModel.cjs");
 const cors = require("cors");
-
+const multer = require('multer')
+const path = require('path')
+const fs = require('node:fs');
 const app = express();
 
 const PORT = 3000;
+//utilizar multer como middleware
+
 
 app.use(cors());
-
 app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+
 
 sequelize
   .sync()
@@ -34,7 +41,7 @@ app.get("/api/characters", async (req, res) => {
         .status(404)
         .json({ message: "No se encontraron personajes en la base de datos" });
     } else {
-      console.log("Personajes obtenidos desde la base de datos:", characters);
+      console.log("Personajes obtenidos desde la base de datos:"/* , characters */);
       res.json({ source: "base_de_datos", characters });
     }
   } catch (error) {
@@ -42,11 +49,47 @@ app.get("/api/characters", async (req, res) => {
     res.status(500).send("Error del servidor");
   }
 });
+function saveImage(file){
+  /* const newPath = `./uploads/${file}`;
+   fs.renameSync('./uploads/', newPath);  */
+  return file.path;  
+}
+const upload = multer({dest:'uploads/'})
+// Ruta para recibir la imagen del form
+
+app.post('/createcharacter', upload.single('image'), async (req, res) => {
+  console.log(req.file)
+    try {
+      if (req?.file) {
+        console.log('estoy dentro del if')
+        const newPath =  saveImage(req.file)
+        res.send('TErmiando')
+        console.log(newPath)
+      }
+      
+    /* const { name, gender, species, status } = req.body;
+    const newCharacter = await Character.create({
+      name,
+      gender,
+      species,
+      status,
+      image: newPath, // Guardar la ruta de la imagen en la base de datos
+    });
+    const personajeCreado = await Character.create(newCharacter);
+
+    
+    res.status(201).json({ message: 'Personaje creado con ID exclusivo', personaje: personajeCreado }); */
+  } catch (error) {
+    console.error('Error al procesar la solicitud:', error.message);
+    res.status(500).send('Error interno del servidor');
+  }  
+});
 
 
-app.post("/api/characters", async (req, res) => {
 
-  
+
+
+/* app.post("/api/characters", async (req, res) => {
 
   try {
     
@@ -72,4 +115,4 @@ app.post("/api/characters", async (req, res) => {
     console.error('Error al crear el personaje:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
 }
-});
+}); */

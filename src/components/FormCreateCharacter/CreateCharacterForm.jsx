@@ -17,9 +17,13 @@ export const CreateCharacterForm = () => {
     image: "",
   });
 
-  const [imageBlob, setImageBlob] = useState();
-
-  /* const [selectedFileName, setSelectedFileName] = useState('') */
+const handleImageChange = (e)=>{
+  const imageFile = e.target.files[0];
+  setCharacterData(prevData => ({
+    ...prevData, image: imageFile.name
+  }))
+}
+ 
 
   const handleChange = (e) => {
     setCharacterData({
@@ -28,45 +32,18 @@ export const CreateCharacterForm = () => {
     });
   };
 
-  const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
 
-  const handleImageChange = (e) => {
-    
-    const selectedImage = e.target.files[0];
-    if (selectedImage) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedImage);
-      reader.onloadend = () => {
-        setCharacterData({
-          ...characterData,
-          image: reader.result,
-        });
-      };
 
-      if (!allowedTypes.includes(selectedImage.type)) {
-        alert(
-          "Formato de archivo no válido. Por favor, selecciona una imagen JPEG, PNG o GIF."
-        );
-        e.target.value = "";
-        return;
-      }
-    }
-  };
-
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(characterData);
     try {
-      const response = await axios.post("http://localhost:3000/api/characters", characterData);
-
-    
-
+    console.log(characterData)
+    const response = await axios.post("http://localhost:3000/createcharacter", characterData);  
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar datos al servidor:", error);
-    }
-  };
+    }  
+  }; 
 
   const buttonBack = () =>{
     navigate('/home')
@@ -82,14 +59,14 @@ export const CreateCharacterForm = () => {
     </div>
       <div className="container-all">
         <div className="container-form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} action="/createcharacter" method="POST" encType="multipart/form-data">
             <label className="text-label">
               Image:
               <input
                 type="file"
                 name="image"
                  accept="image/*"
-                onChange={handleImageChange}
+                 onChange={handleImageChange}
               />
             
             </label>
@@ -129,7 +106,7 @@ export const CreateCharacterForm = () => {
                 onChange={handleChange}
               />
             </label>
-            <button className="btn-form" type="submit">
+            <button  className="btn-form" type="submit">
               Create Character
             </button>
           </form>

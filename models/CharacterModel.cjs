@@ -1,4 +1,4 @@
-const { DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize')
 const sequelize = require('../db/dbase.cjs')
 
 const Character = sequelize.define('Characters',{
@@ -24,7 +24,7 @@ const Character = sequelize.define('Characters',{
         allowNull:false,
     },
     image:{
-        type: DataTypes.STRING,
+        type: DataTypes.BLOB('long'),
         allowNull:false
     }
 })

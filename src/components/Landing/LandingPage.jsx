@@ -1,6 +1,6 @@
 import "./LandingPage.css";
 import { NavLink } from "react-router-dom";
-import imgLanding from "../../images/rickandmortylanding.png";
+import imgLanding from '../../imagesfront/rickandmortylanding.jpg';
 
 export const LandingPage = () => {
   return (
