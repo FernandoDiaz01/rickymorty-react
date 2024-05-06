@@ -3,6 +3,10 @@
     width: 306px;
     
 }
+img{
+    width: 15.625vw;
+    height: 27.777vh;
+}
 
 .img-container{
     border: 3px solid #1eff00;

@@ -1,94 +1,109 @@
 
 .container-all {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-color: #282c34; /* Fondo oscuro inspirado en Rick and Morty */
+    background-color: #282c34;
   }
   
 .container-title-character-form{
+  position: relative; /* Establecemos la posición relativa para el contenedor */
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: black;
+  justify-content: center; /* Centramos horizontalmente */
   font-size: 2rem;
-  color: black;
- 
-  background-color: #282c34;
+  height: 100px;
+}
+
+.container-button{
+  position: absolute; /* Establecemos la posición absoluta */
+  right: 150%; 
+}
+
+.title-character-form{
+  color: #39ff14;
+  display: flex;
+
 }
 
   .container-form {
     background-color: #393939;
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5%;
+    margin-top:3% ;
+    
   }
   
   form {
     display: flex;
     flex-direction: column;
   }
-  
-  label {
+  .text-label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-
-  .text-label{
-    color: #fcfcfc;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-family: 'Get Schwifty', cursive;
+    color: #39ff14; /* Color de la etiqueta de texto */
   }
   
   input[type="text"],
-  input[type="number"],
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-    border: 1px solid #555;
-    border-radius: 4px;
-    
-  }
-  .btn-form{
-    padding: 15px 30px;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
+  input[type="file"],
+  select {
+    width: calc(100% - 10px);
+    font-size: 1rem;
+    padding: 18px;
+    margin-bottom: 10px;
     border: none;
-    border-radius: 8px;
-    background-color: #ff0055;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.4s, transform 0.4s;
-    z-index: 1;
-    margin: 20px;
-}
+    border-radius: 10px;
+    background-color: #292929;
+    color: #39ff14;
+    letter-spacing: 1px;
+  }
 
-.btn-form::before{
-    content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: #ffd700;
-  width: 300%;
-  height: 300%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  z-index: -1;
-  transition: transform 0.4s;
+  
+    .btn{
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff0055;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.4s, transform 0.4s;
+      z-index: 1;
+      margin: 20px;
+  }
+  
+    .container-success-message{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.9rem;
+      
+    }
+  .success-message{
+    color: white;
+ 
+  }
+
+
+  /* Media query para dispositivos móviles */
+@media screen and (max-width: 680px) {
+  .container-title-character-form {
+    height: auto; /* Cambiamos la altura automática */
+    padding: 10px; /* Agregamos espacio interno */
+  }
+
+  .container-button {
+    position: static; /* Volvemos a la posición estática para que esté en el flujo normal */
+    margin-top: 10px; /* Agregamos un margen superior */
+    margin-left: 10px; /* Agregamos un margen izquierdo */
+  }
 }
-.btn-form:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  .btn-form:hover {
-    color: #ff0055;
-    transform: scale(1.1);
-  }

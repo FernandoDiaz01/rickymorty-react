@@ -1,57 +1,69 @@
-import { useState, useEffect, useCallback  } from 'react';
-import { InView } from "react-intersection-observer";
-import './App.css'
-import  {getCharacters}  from './services/getCharacters.js'
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import { getCharacters } from './services/getCharacters.js';
 import { MyRoutes } from './routers/routes.jsx';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function App() {
-const [characters, setCharacters] = useState([])
-const [page, setPage] = useState(1)
+  const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loader, setLoader] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoader(true);
+      try {
+        
+        const newCharacters = await getCharacters(page);
+        setCharacters(newCharacters);
+    
+        if (newCharacters.length < 20) {
+          setHasMore(false);
+        }
+      } catch (error) {
+        console.error('Error fetching characters', error);
+      } finally {
+        setLoader(false);
+      }
+    };
 
+    fetchData();
+  }, []);
 
-const gettingCharacters = useCallback(async (pageNum) => {
-  try {
-    const results = await getCharacters(pageNum);
+  const fetchMoreData = async () => {
+    try {
+      setLoader(true);
+      const newCharacters = await getCharacters(page + 1);
+      
+      setCharacters((prevCharacters) => [...prevCharacters, ...newCharacters]);
+      setPage((prevPage) => prevPage + 1);
 
-    // Verifica si results es un array antes de intentar iterar
-    if (Array.isArray(results)) {
-      setCharacters((prev) => [...prev, ...results]);
-    } else {
-      console.error('Error: results is not an array', results);
+      if (newCharacters.length < 20) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Error fetching more characters', error);
+    } finally {
+      setLoader(false);
     }
-  } catch (error) {
-    console.error('Error fetching characters:', error);
-  }
-}, []);
-
-
-const loadMoreCharacters = () => {
-  setPage((prev) => prev + 1);
-};
-
-
-
-useEffect(() => {
-  gettingCharacters(page);
-}, [ page]);
-
+  };
 
   return (
     <>
-    
-      <MyRoutes characters={characters}/>
-    
-     <InView
-        as="div"
-        onChange={loadMoreCharacters}
-        rootMargin="0px 0px 100px 0px" 
+      
+      <InfiniteScroll
+        dataLength={characters.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        /* loader={<p>Loading characters...</p>} */
+       
       >
-   
-      </InView> 
-        </>
-  )
+     
+      </InfiniteScroll>
+      <MyRoutes characters={characters} />
+    </>
+  );
 }
 
-export default App
+export default App;

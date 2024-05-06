@@ -31,7 +31,7 @@ async function callDataFromAPI() {
 
 async function fillDatabase(){
     try {
-        await sequelize.sync({force:false})
+        await sequelize.sync({force:true})
 
         //tomando los datos de la api
 

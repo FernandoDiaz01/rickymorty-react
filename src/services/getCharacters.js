@@ -3,19 +3,18 @@ import axios from 'axios'
 
 
 
-export const getCharacters = async () => {
-
+export const getCharacters = async (pageNum) => {
   try {
-    const response = await axios.get('http://localhost:3000/api/characters',{
-      headers:{
+    const response = await axios.get(`http://localhost:3000/api/characters?page=${pageNum}`, {
+      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000'
       }
     });
-    const data = await response.data;
+    const data = response.data;
     console.log('Datos obtenidos desde el servidor:', data);
-    return data.characters;
+
+     return data.characters
   } catch (error) {
     console.error('Error al obtener datos desde el back-end', error);
     throw error;
