@@ -14,7 +14,7 @@ export const MyRoutes = ({characters}) => {
             <Route exact path='/' element={<LandingPage />} />
             <Route exact path='/home' element={<CharacterList characters={characters} />} />
             <Route exact path='/character/:id' element={<Detail/>}  />
-            <Route exact path='/createcharacter' element={<CreateCharacterForm/>}  />
+            <Route exact path='/createcharacter' element={<CreateCharacterForm />}  />
         </Routes>
    
     

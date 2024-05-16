@@ -21,6 +21,7 @@ export const CharacterList = ({characters}) => {
       <ul className='character-list'>
         {characters?.map((character) => (
           <Character
+          key={character.id}
             {...character}
           />
         ))}

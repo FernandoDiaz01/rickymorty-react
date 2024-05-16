@@ -57,9 +57,11 @@ export const CreateCharacterForm = () => {
       console.log("Respuesta del servidor:", response.data);
       setMessage("¡Personaje creado con éxito!");
 
-      setTimeout(() => {
+       setTimeout(() => {
         navigate("/home");
-      }, 5000);
+      }, 5000); 
+
+    
     } catch (error) {
       console.error("Error al enviar datos al servidor:", error);
     }

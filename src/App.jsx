@@ -11,26 +11,33 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoader(true);
-      try {
-        
-        const newCharacters = await getCharacters(page);
-        setCharacters(newCharacters);
-    
-        if (newCharacters.length < 20) {
-          setHasMore(false);
+   
+     
+      const fetchData = async () => {
+        setLoader(true);
+        try {
+          
+          const newCharacters = await getCharacters(page);
+          setCharacters(newCharacters);
+          
+      
+          if (newCharacters.length < 20) {
+            setHasMore(false);
+          }
+        } catch (error) {
+          console.error('Error fetching characters', error);
+        } finally {
+          setLoader(false);
         }
-      } catch (error) {
-        console.error('Error fetching characters', error);
-      } finally {
-        setLoader(false);
-      }
-    };
-
-    fetchData();
+      };
+  
+      fetchData();
+    
+    
+    
   }, []);
 
+  
   const fetchMoreData = async () => {
     try {
       setLoader(true);
@@ -47,7 +54,7 @@ function App() {
     } finally {
       setLoader(false);
     }
-  };
+  };  
 
   return (
     <>
